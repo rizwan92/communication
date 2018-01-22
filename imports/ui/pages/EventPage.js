@@ -45,7 +45,7 @@ class EventPage extends Component {
     let setImagelinkState = (link)=> {
       this.setState({image:link});
     }
-           cloudinary.openUploadWidget({ cloud_name: 'dcr2pfgxy', upload_preset: 'kzkxno3w', tags:['xmas']},
+           cloudinary.openUploadWidget({ cloud_name: 'da0lzfub2', upload_preset: 'rbrkicgp', tags:['xmas']},
                function(error, result) {
                  if (error) {
                  }else {

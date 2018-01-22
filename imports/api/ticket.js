@@ -7,6 +7,7 @@ Meteor.methods({
   'ticket.insert'(ticket) {
   return  TicketApi.insert({
       name:ticket.name,
+      description:ticket.description,
       price:ticket.price,
       status:1,
       createdAt: new Date(), // current time
@@ -26,6 +27,10 @@ Meteor.methods({
   'ticket.check'(email,password) {
     let user = TicketApi.findOne({email,password});
     return user;
+  },
+  'ticket.all'() {
+    const ticket = TicketApi.find().fetch();
+    return ticket;
   },
   'ticket.singleitem'(user) {
     let User = TicketApi.findOne({_id:user});

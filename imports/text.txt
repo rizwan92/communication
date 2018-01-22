@@ -1,2 +1,31 @@
 <div className="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" >
 </div>
+
+
+=========================================================================================
+<div style={{width:'100%',justifyContent:'center'}}>
+  {
+    this.state.ticket.map((tick,i)=>{
+      let myevent = this.state.event.find((event)=> event._id == this.state.eventid ? event : null)
+      let ticketid = myevent == undefined ? null : myevent.selectedticket ;
+      if (ticketid != null) {
+          let exist = ticketid.find((tickid)=> tickid.toString() === tick._id)
+          if (exist) {
+            return(
+              <li className="mdl-list__item mdl-list__item--two-line" key={i}>
+              <span className="mdl-list__item-primary-content">
+                <div style={{cursor:'pointer'}}>{tick.name}</div>
+              </span>
+              <span className="mdl-list__item-secondary-action" style={{marginLeft:10}}>
+              <div className="mdl-textfield mdl-js-textfield">
+                <input className="mdl-textfield__input" style={{width:200}} type="number" id={`${tick._id}`} placeholder="How mAny ?"/>
+              </div>
+              </span>
+            </li>
+
+            )
+          }
+      }
+  })
+  }
+  </div>

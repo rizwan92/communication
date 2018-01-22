@@ -1,0 +1,16 @@
+.ordercss {
+  background: #5C6BC0;
+  height: 100vh;
+}
+.mdl-card {
+  margin-left: auto;
+  margin-bottom: 40px;
+  margin-right: auto;
+}
+.mdl-card-order > .mdl-card__title {
+  color: #fff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: #3F51B5;
+
+}

@@ -13,6 +13,14 @@ class HomePage extends Component {
   this.linktracker.stop();
   }
 
+  deleteEvent(id){
+    let result = confirm("Want to delete?");
+  if (result) {
+      Meteor.call('event.remove',id)
+    }
+  }
+
+
   render() {
 
     return (
@@ -35,7 +43,7 @@ class HomePage extends Component {
               </div>
               <div className="mdl-card__menu">
                 <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                  <i className="material-icons">share</i>
+                  <i className="material-icons" onClick={this.deleteEvent.bind(this,evnt._id)}>share</i>
                 </button>
               </div>
             </div>

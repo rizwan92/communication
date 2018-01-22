@@ -8,6 +8,8 @@ class TicketPage extends Component {
     this.state ={
       name:'',
       price:'',
+      description:'',
+      description:'',
       ticket:[],
     } ;
   }
@@ -30,6 +32,7 @@ class TicketPage extends Component {
 
     let name = this.state.name.trim();
     let price = this.state.price.trim();
+    let description = this.state.description.trim();
     if (name === '') {
       this.showSnackBar("Enter Name of ticket")
       return false;
@@ -38,12 +41,16 @@ class TicketPage extends Component {
       this.showSnackBar("Enter price of ticket")
       return false;
     }
+    if (description === '') {
+      this.showSnackBar("Enter description of ticket")
+      return false;
+    }
     let ticket = {
-      name,price
+      name,price,description
     }
     Meteor.call('ticket.insert',ticket,(err,res)=>{
       if (res) {
-        this.setState({name:'',price:''} )
+        this.setState({name:'',price:'',description:''} )
         this.showSnackBar(name+" Entered Successfully")
       }
     })
@@ -86,6 +93,12 @@ class TicketPage extends Component {
           <label className="mdl-textfield__label" htmlFor="sample1">Ticket Price</label>
         </div>
 
+
+        <div className="mdl-textfield mdl-js-textfield">
+          <input className="mdl-textfield__input" type="text" id="sample1" onChange={this.setValue.bind(this,'description')} value={this.state.description}/>
+          <label className="mdl-textfield__label" htmlFor="sample1">Ticket Description</label>
+        </div>
+
         <button id="demo-show-toast" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" >Submit</button>
         </div>
       </form>
@@ -102,6 +115,7 @@ class TicketPage extends Component {
                 <i className="material-icons  mdl-list__item-avatar" style={{textAlign:'center', lineHeight: '40px',fontSize:18,cursor:'pointer'}}>{tick.name[0].toUpperCase()}</i>
                 <div style={{cursor:'pointer'}}>{tick.name}</div>
                 <span className="mdl-list__item-sub-title" style={{marginRght:10,marginLeft:10}}>   ₹.{tick.price}</span>
+                <span className="mdl-list__item-sub-title" style={{marginRght:10,marginLeft:10}}>   ₹.{tick.description}</span>
               </span>
               <span className="mdl-list__item-secondary-action" >
               <i className="material-icons" onClick={this.deleteTicket.bind(this,tick._id)} style={{cursor:'pointer'}}>delete</i>

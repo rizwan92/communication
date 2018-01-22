@@ -13,6 +13,7 @@ Meteor.methods({
       date:event.date,
       image:event.image,
       selectedticket:event.selectedticket,
+      eventstate:event.eventstate,
       status:1,
       createdAt: new Date(), // current time
     });
@@ -28,8 +29,8 @@ Meteor.methods({
     check(taskId, String);
     EventApi.remove(taskId);
   },
-  'event.check'(email,password) {
-    let user = EventApi.findOne({email,password});
+  'myevent.get'(eventid) {
+    let user = EventApi.findOne({_id:eventid});
     return user;
   },
   'event.singleitem'(user) {

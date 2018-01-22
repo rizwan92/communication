@@ -26,10 +26,13 @@ Meteor.methods({
         $set: { image },
       });  },
   'user.remove'(taskId) {
-    check(taskId, String);
-    UserApi.remove(taskId);    //Logic to delete the item
+    UserApi.remove(taskId);
   },
   'user.check'(email,password) {
+    let user = UserApi.findOne({email});
+    return user;
+  },
+  'user.checkemailandpassword'(email,password) {
     let user = UserApi.findOne({email,password});
     return user;
   },

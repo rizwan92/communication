@@ -27,11 +27,15 @@ class LoginPage extends Component {
    const email = this.state.email.trim();
    const password = this.state.password.trim();
     const router=this;
-    Meteor.call('user.check',email,password,(err,res)=>{
+    Meteor.call('user.checkemailandpassword',email,password,(err,res)=>{
       if (res) {
+        if (res.type == null || res.type === '') {
+          Bert.alert( 'you are registered but not authorized ', 'warning', 'growl-top-right' );
+        }else {
           Bert.alert( 'succefull logged in', 'success', 'growl-top-right' );
           Session.setPersistent('maroonuser', res)
-           router.props.history.push('/admin')
+          router.props.history.push('/admin')
+        }
       }else {
         Bert.alert( 'User not registered', 'warning', 'growl-top-right' );
       }
@@ -61,6 +65,7 @@ class LoginPage extends Component {
            Meteor.call('user.insert',user,(er,res)=>{
              if (!er) {
                Bert.alert( `Successfull Registered`, 'success', 'growl-top-right' );
+               this.setState({condition:!this.state.condition})
              }
            });
          }
@@ -98,7 +103,7 @@ class LoginPage extends Component {
 
 
         <div className="mdl-textfield mdl-js-textfield">
-          <input className="mdl-textfield__input" type="text" id="sample1" onChange={this.setValue.bind(this,'password')} value={this.state.password}/>
+          <input className="mdl-textfield__input" type="text" id="sample2" onChange={this.setValue.bind(this,'password')} value={this.state.password}/>
           <label className="mdl-textfield__label" htmlFor="sample1">Password</label>
         </div>
 
@@ -110,43 +115,43 @@ class LoginPage extends Component {
       <div style={{display:'flex',justifyContent:'center',flexFlow:'column',alignItems:'center',width:'100%',height:'100%'}}>
 
         <div className="mdl-textfield mdl-js-textfield" >
-          <input className="mdl-textfield__input" type="text" id="sample1" onChange={this.setValue.bind(this,'name')} value={this.state.name}/>
+          <input className="mdl-textfield__input" type="text" id="sample3" onChange={this.setValue.bind(this,'name')} value={this.state.name}/>
           <label className="mdl-textfield__label" htmlFor="sample1">Name</label>
         </div>
 
 
         <div className="mdl-textfield mdl-js-textfield">
-          <input className="mdl-textfield__input" type="email" id="sample1" onChange={this.setValue.bind(this,'email')} value={this.state.email}/>
+          <input className="mdl-textfield__input" type="email" id="sample4" onChange={this.setValue.bind(this,'email')} value={this.state.email}/>
           <label className="mdl-textfield__label" htmlFor="sample1">Email</label>
         </div>
 
 
         <div className="mdl-textfield mdl-js-textfield">
-          <input className="mdl-textfield__input" type="number" id="sample1" onChange={this.setValue.bind(this,'number')} value={this.state.number}/>
+          <input className="mdl-textfield__input" type="number" id="sample5" onChange={this.setValue.bind(this,'number')} value={this.state.number}/>
           <label className="mdl-textfield__label" htmlFor="sample1">Number</label>
         </div>
 
 
         <div className="mdl-textfield mdl-js-textfield">
-          <input className="mdl-textfield__input" type="text" id="sample1" onChange={this.setValue.bind(this,'city')} value={this.state.city}/>
+          <input className="mdl-textfield__input" type="text" id="sample6" onChange={this.setValue.bind(this,'city')} value={this.state.city}/>
           <label className="mdl-textfield__label" htmlFor="sample1">City</label>
         </div>
 
 
         <div className="mdl-textfield mdl-js-textfield">
-          <input className="mdl-textfield__input" type="text" id="sample1" onChange={this.setValue.bind(this,'address')} value={this.state.address}/>
+          <input className="mdl-textfield__input" type="text" id="sample7" onChange={this.setValue.bind(this,'address')} value={this.state.address}/>
           <label className="mdl-textfield__label" htmlFor="sample1">Address</label>
         </div>
 
 
         <div className="mdl-textfield mdl-js-textfield">
-          <input className="mdl-textfield__input" type="password" id="sample1" onChange={this.setValue.bind(this,'password')} value={this.state.password}/>
+          <input className="mdl-textfield__input" type="password" id="sample8" onChange={this.setValue.bind(this,'password')} value={this.state.password}/>
           <label className="mdl-textfield__label" htmlFor="sample1">Password</label>
         </div>
 
 
         <div className="mdl-textfield mdl-js-textfield">
-          <input className="mdl-textfield__input" type="password" id="sample1" onChange={this.setValue.bind(this,'cpassword')} value={this.state.cpassword}/>
+          <input className="mdl-textfield__input" type="password" id="sample9" onChange={this.setValue.bind(this,'cpassword')} value={this.state.cpassword}/>
           <label className="mdl-textfield__label" htmlFor="sample1">Confirm Password</label>
         </div>
 
@@ -157,8 +162,6 @@ class LoginPage extends Component {
 
       <div style={{cursor:'pointer',margin:10,color:'blue',marginLeft:200}} onClick={()=>{this.setState({condition:!this.state.condition})}}>{this.state.condition ?  "Register ?" : "Login ?"}</div>
       </div>
-
-
 
       </div>
       </div>

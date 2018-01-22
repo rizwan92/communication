@@ -134,29 +134,34 @@ class AgentPage extends Component {
 
       {
         this.state.agent.length == 0 ? null :
-          <ul className="demo-list-control mdl-list">
+        <table className="mdl-data-table mdl-js-data-table  mdl-shadow--2dp" style={{width:'100%',marginTop:20}}>
+          <thead>
+          <tr>
+            <th className="mdl-data-table__cell--non-numeric">User Name</th>
+            <th>Email</th>
+            <th>Contacts</th>
+            <th>address</th>
+            <th>City</th>
+            <th>action</th>
+          </tr>
+          </thead>
+          <tbody>
           {
           this.state.agent.map((tsp,i)=>{
             return(
-              <li className="mdl-list__item mdl-list__item--two-line" key={i}>
-              <span className="mdl-list__item-primary-content" >
-                <i className="material-icons  mdl-list__item-avatar" style={{textAlign:'center', lineHeight: '40px',fontSize:18,cursor:'pointer'}}>{tsp.name[0].toUpperCase()}</i>
-                <div style={{cursor:'pointer'}}>{tsp.name}</div>
-                 <span className="mdl-list__item-sub-title">{tsp.city}</span>
-                 <span className="mdl-list__item-sub-title"> {tsp.address}</span>
-              </span>
-              <span className="mdl-list__item-primary-content" >
-                <span className="mdl-list__item-sub-title">phone : {tsp.number}</span>
-                <span className="mdl-list__item-sub-title">password : {tsp.password}</span>
-              </span>
-              <span className="mdl-list__item-secondary-action" style={{marginLeft:10}}>
-              <i className="material-icons" onClick={this.deleteAgent.bind(this,tsp._id)} style={{cursor:'pointer'}}>delete</i>
-              </span>
-            </li>
+              <tr key={i}>
+                <td className="mdl-data-table__cell--non-numeric">{tsp.name}</td>
+                <td>{tsp.email}</td>
+                <td>{tsp.number}</td>
+                <td>{tsp.address}</td>
+                <td>{tsp.city}</td>
+                <td><i className="material-icons" style={{color:'red',cursor:'pointer'}} onClick={this.deleteAgent.bind(this,tsp._id)}>delete_forever</i></td>
+              </tr>
             )
           })
         }
-        </ul>
+        </tbody>
+        </table>
       }
 
       </div>
