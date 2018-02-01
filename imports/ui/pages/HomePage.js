@@ -34,7 +34,7 @@ class HomePage extends Component {
               <div className="mdl-card__title" style={{background:`url('${evnt.image}')`,backgroundPosition:'center center',backgroundSize:'100% auto'}}>
                 <h6 className="mdl-card__title-text">{evnt.title}</h6>
               </div>
-              <div className="mdl-card__supporting-text">{evnt.subtitle}</div>
+              <div className="mdl-card__supporting-text">{evnt.subtitle + "  "+ evnt.eventstate}</div>
               <div className="mdl-card__supporting-text">{evnt.description}</div>
               <div className="mdl-card__actions mdl-card--border">
                 <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">

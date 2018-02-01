@@ -24,7 +24,12 @@ Meteor.methods({
   'event.update'(userid,image) {
     EventApi.update(userid, {
         $set: { image },
-      });  },
+      });
+    },
+    'event.all'() {
+      const event = EventApi.find().fetch();
+      return event;
+      },
   'event.remove'(taskId) {
     check(taskId, String);
     EventApi.remove(taskId);

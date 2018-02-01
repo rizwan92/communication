@@ -101,7 +101,7 @@ class TicketPookingPage extends Component {
     Meteor.call('order.insert',order,(err,res)=>{
       if (res) {
         this.sendemail(email,name,res,this.state.eventname,this.state.ticketname);
-        this.sendsms(name,number,res)
+        this.sendsms(name,number,res,this.state.eventname)
         this.setState({name:''} )
         this.showSnackBar(name+" Entered Successfully")
       }
@@ -166,9 +166,9 @@ class TicketPookingPage extends Component {
       });
     }
 
-sendsms(name,number,orderid){
+sendsms(name,number,orderid,eventname){
   fetch(`http://api.msg91.com/api/sendhttp.php?sender=MAROON&route=4&country=91&message=Thank You ${name} for buying tickets your order id is ${orderid}
-     Concert details - Diljit dosanjh live in Raipur , Date 13/01/2017 Venue -Kamal Vihar Raipur ,Chhattisgarh Time starting from 5 pm
+      Concert details - ${eventname} , Venue -  Raipur,Chhattisgarh
      link to get order detail is http://ticket.maroonentertainment.in/order/${orderid}
     &authkey=189400AOUmlmC15a3e1c68&mobiles=${number}`, {
       method: 'GET',
