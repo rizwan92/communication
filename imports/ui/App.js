@@ -9,7 +9,7 @@ export default class App extends Component {
 
   render(){
    return (
-     <div>
+      <div>
       <Switch>
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/home/event" component={MainLayout} />
